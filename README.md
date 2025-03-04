@@ -1,4 +1,4 @@
-# Multi-Threaded Proxy Server (With & Without Cache)
+# Multi-Threaded Proxy Server (With LRU Cache)
 
 This project is built using **C** and focuses on HTTP parsing.
 
@@ -12,24 +12,22 @@ This project is built using **C** and focuses on HTTP parsing.
 
 ---
 
-##  Overview
+## 🔍 Overview
 
-###  Introduction
-A **proxy server** acts as an intermediary between a client and the internet. Below is a simple workflow of how the proxy functions:
+### ✨ Introduction
+A **Multithreaded Proxy Web Server with LRU Cache** acts as a middleman between clients (like web browsers) and actual web servers. Here’s how it works:
 
-![Proxy Server Workflow](pics/UML.JPG)
+1. **Receive Requests:** When a client (browser) requests a webpage, the proxy server intercepts and handles the request instead of directly contacting the website.
+2. **Check Cache (LRU Cache):** Before fetching the webpage from the internet, it checks if a recent copy is stored in memory.
+   - If the page is in the cache (**cache hit**), it serves the stored copy, making the process faster.
+   - If not (**cache miss**), it fetches the page from the actual web server, stores it in the cache, and then returns it to the client.
+3. **Use LRU (Least Recently Used) Policy:** If the cache is full, it removes the least recently used page to make space for new ones.
+4. **Handle Multiple Requests (Multithreading):** It uses multiple threads to manage multiple client requests simultaneously, improving efficiency.
 
-### ⚡ Multi-threading Implementation
-To achieve multi-threading, we used:
-- **Semaphores** instead of **Condition Variables** and `pthread_join()`/`pthread_exit()`.
-- Unlike `pthread_join()`, which requires a thread ID to wait for, **semaphores** (`sem_wait()` and `sem_post()`) function without additional parameters, making them more efficient in this scenario.
-
-### 🚀 Why This Project?
-The project was developed to understand:
-- How a request from a local system reaches a server.
-- Managing multiple client requests simultaneously.
-- Ensuring proper locking mechanisms for concurrency.
-- The caching mechanisms used by web browsers.
+### 🚀 Why is this Useful?
+- **Faster Browsing:** Cached pages load instantly.
+- **Reduced Bandwidth Usage:** Less data is retrieved from the internet.
+- **Handles Multiple Users:** Many clients can connect at the same time without experiencing delays.
 
 ### 🛡 Role of a Proxy Server
 A proxy server plays a crucial role in:
