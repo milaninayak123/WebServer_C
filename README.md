@@ -4,14 +4,6 @@ This project is built using **C** and focuses on HTTP parsing.
 
 ---
 
-## 📌 Index
-- [Overview](#overview)
-- [How to Run](#how-to-run)
-- [Demo](#demo)
-- [Contributing](#contributing)
-
----
-
 ## 🔍 Overview
 
 ### ✨ Introduction
