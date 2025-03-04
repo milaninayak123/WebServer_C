@@ -1,61 +1,63 @@
-# Multi-Threaded Proxy Server with and without Cache
+# Multi-Threaded Proxy Server (With & Without Cache)
 
-This project is implemented using **C** and HTTP parsing.
+This project is built using **C** and focuses on HTTP parsing.
 
-## Index
-- [Project Theory](#project-theory)
+---
+
+## 📌 Index
+- [Overview](#overview)
 - [How to Run](#how-to-run)
 - [Demo](#demo)
 - [Contributing](#contributing)
 
 ---
 
-## Project Theory
-[Back to top](#index)
+##  Overview
 
-### **Introduction**
-**Basic Working Flow of the Proxy Server:**
+###  Introduction
+A **proxy server** acts as an intermediary between a client and the internet. Below is a simple workflow of how the proxy functions:
 
 ![Proxy Server Workflow](pics/UML.JPG)
 
-### **How did we implement Multi-threading?**
-- Used **Semaphore** instead of **Condition Variables** and `pthread_join()`/`pthread_exit()`.
-- `pthread_join()` requires passing the thread ID to wait for.
-- **Semaphore’s** `sem_wait()` and `sem_post()` do not need parameters, making it a better option.
+### ⚡ Multi-threading Implementation
+To achieve multi-threading, we used:
+- **Semaphores** instead of **Condition Variables** and `pthread_join()`/`pthread_exit()`.
+- Unlike `pthread_join()`, which requires a thread ID to wait for, **semaphores** (`sem_wait()` and `sem_post()`) function without additional parameters, making them more efficient in this scenario.
 
-### **Motivation/Need of the Project**
-To Understand:
-- How requests from a local computer reach a server.
-- Handling multiple client requests.
-- Locking procedures for concurrency.
-- Cache functions used by browsers.
+### 🚀 Why This Project?
+The project was developed to understand:
+- How a request from a local system reaches a server.
+- Managing multiple client requests simultaneously.
+- Ensuring proper locking mechanisms for concurrency.
+- The caching mechanisms used by web browsers.
 
-### **What Does a Proxy Server Do?**
-- Speeds up processes and reduces server traffic.
-- Restricts users from accessing specific websites.
-- Hides the client's IP address from the server.
-- Can be modified to **encrypt requests** and enhance security.
-
----
-
-## **OS Components Used**
-- **Threading**
-- **Locks**
-- **Semaphore**
-- **Cache** (Uses **LRU algorithm**)
+### 🛡 Role of a Proxy Server
+A proxy server plays a crucial role in:
+- **Enhancing speed & reducing traffic** to main servers.
+- **Restricting access** to specific websites.
+- **Hiding the client’s IP address** for privacy.
+- Modifying requests to **encrypt traffic** for improved security.
 
 ---
 
-## **Limitations**
-- If a URL loads multiple clients itself, the cache stores each response separately, leading to partial retrieval.
-- The cache has a **fixed size**, so large websites may not be fully stored.
+## ⚙ OS Components Used
+- **Threading** for handling multiple requests.
+- **Locks** for concurrency control.
+- **Semaphores** for thread synchronization.
+- **Cache (LRU Algorithm)** for optimizing response times.
 
 ---
 
-## **How This Project Can Be Extended**
-- Implementing **multiprocessing** for parallel execution.
-- Controlling **website access permissions**.
-- Supporting **POST requests** in addition to GET.
+## ⚠ Limitations
+- If a URL loads multiple clients on its own, the cache stores them separately, which may cause partial retrieval issues.
+- The cache has a **fixed size**, meaning large websites might not be stored entirely.
 
 ---
 
+## 🔧 Future Enhancements
+Potential improvements to the project:
+- Implementing **multiprocessing** for better parallelism.
+- Adding **website access control** mechanisms.
+- Extending support for **POST requests** along with GET requests.
+
+---
